@@ -37,26 +37,9 @@ python run.py fit-transform --backend clip --input clip_age.npz --output clip_ag
 python run.py fit-transform --backend se3 --input poses.npz --output poses_transformed.npz --state-out poses_state.npz
 ```
 
-## Settings
+## Options
 
-- CLIP defaults: fit rank 8, ridge .1; apply the first 7 axes with alpha 1,
-  forward order, one pass. Face ranks are capped by class count and dimension.
-- MERU is available through `--backend meru` or `face.fit(..., backend="meru")`.
-  Defaults: rank 8, ridge .01, curvature .10000000149011612, angular gain .75,
-  translation gain 1, forward order, one pass. `--angular` and `--translation`
-  are independent effective gains. `--composition` sets their order **within each
-  axis** (default: angular then translation). `--alpha` is for CLIP/SE3;
-  MERU uses its two gains.
-- SE3 fits six tangent FLD axes with fixed ridge 1e-6. Defaults: first 5 axes,
-  alpha 2, translation-only action. Rotation-only and joint actions are also
-  supported via `--action rotation` and `--action joint`. A comma-separated
-  `--schedule` can assign rotation, translation, joint, or skip to each selected
-  axis. The action choice does not change the reference or FLD fitting method.
+MERU embeddings are supported via `--backend meru`.
+SE3 supports translation, rotation, and joint actions through `--action`.
 
-`--rank`, `--alpha`, `--max-rank`, `--ridge`, `--order`, and `--passes` expose the
-applicable settings above; run `python run.py fit-transform --help` for syntax.
-Alpha is a correction gain and may exceed 1. Repeated Face passes reuse frozen
-axes. `--max-rank` controls Face fitting; `--rank` selects the fitted axis prefix.
-
-The Python API is `face.fit` / `face.transform` and `se3.fit` / `se3.transform`.
-Run the tests with `python -m unittest discover -p 'test_*.py'`.
+For available options, run `python run.py fit-transform --help`.
