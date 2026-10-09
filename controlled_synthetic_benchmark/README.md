@@ -15,15 +15,3 @@ bash run_all.sh
 ```
 
 `run_all.sh` first regenerates CMF caches locally via `legacy/cmf_comparison/run_*_cmf.py`, then runs the three unified-metric builders. Generated CSV/JSON/MD/PNG/NPZ outputs are written next to each builder and are intentionally not pre-shipped in this release.
-
-## Included/excluded
-
-Included:
-- source code for all three benchmark geometries;
-- minimal legacy source needed by the builders;
-- metric-plan markdown files for provenance.
-
-Excluded:
-- old backup scripts, `__pycache__`, logs;
-- generated metrics/figures/arrays from the original working directory;
-- precomputed `.pt` CMF caches, because they are generated artifacts.
